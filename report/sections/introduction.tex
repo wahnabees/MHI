@@ -1,0 +1,46 @@
+\section{Introduction}
+
+Human activity recognition (HAR) plays an important role in applications such
+as surveillance and security, human–computer interaction, consumer devices,
+sports analytics, automotive systems, and healthcare monitoring. A core
+challenge in HAR is to represent the dynamics of human motion in a form that is
+both compact and discriminative, while remaining robust to variations in
+subjects, appearance, and viewpoint. Although deep learning methods have
+become dominant in recent years, classical motion-template approaches continue
+to offer interpretable and computationally efficient alternatives for
+video-based action analysis.
+
+Motion History Images (MHI) and Motion Energy Images (MEI), introduced in the
+seminal work of Bobick and Davis~\cite{bobick2001}, convert a sequence of
+frames into static temporal templates that summarize where motion has occurred
+and how it evolves over time. These templates have been widely used in early
+HAR pipelines due to their simplicity and their ability to encode coarse action
+structure in a compact form.
+
+Once constructed, MHIs and MEIs allow the extraction of global shape-based
+features. Hu moments provide a lightweight, invariant descriptor that has been
+used in template-matching and gesture-recognition tasks within classical
+computer-vision systems \cite{ming2009hu}. More expressive local descriptors,
+such as Histograms of Oriented Gradients (HOG)~\cite{dalal2005}, capture
+fine-grained spatial information and were foundational to many pre-deep-learning
+action-recognition methods. Although HOG is not the focus of this work, it
+serves as a useful point of comparison for understanding the limitations of Hu
+moments and for motivating future improvements.
+
+This paper evaluates an MHI/MEI-based action-recognition system using three
+classical classifiers: Support Vector Machines (SVM)~\cite{cortes1995support},
+$k$-Nearest Neighbors (KNN), and a lightweight Multi-Layer Perceptron (MLP).
+Each classifier is trained on Hu-moment descriptors extracted from motion
+templates, enabling a controlled comparison of classifier behavior under a
+low-dimensional, globally defined representation.
+
+The system pipeline includes preprocessing, motion-template construction,
+feature extraction, classifier training, and evaluation. The experimental
+results highlight both the strengths and limitations of Hu-moment-based
+representations, echoing earlier findings that silhouette-driven templates
+capture coarse motion patterns but struggle with subtle differences among
+similar actions~\cite{bobick2001}. These observations, together with trends in
+modern spatiotemporal feature learning \cite{klaser2008}, point
+toward promising future directions such as HOG-based motion descriptors,
+trajectory-aligned features, or learned CNN representations, as well as
+temporal modeling using probabilistic or recurrent architectures.

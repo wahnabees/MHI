@@ -1,0 +1,97 @@
+\section{Analysis}
+\label{sec:analysis}
+
+To compare the behavior of the three classifiers, we consolidate the main
+performance metrics in Table~\ref{tab:results-summary}. This provides a unified
+view of training, validation, test, and video-level accuracy across SVM, KNN,
+and MLP when all three models are trained using Hu moments extracted from MHI
+and MEI. The table is reported in the Results section; here we focus on
+interpreting the trends it reveals.
+
+\subsection{Key Observations}
+
+\paragraph*{Limited discriminative power of Hu features.}
+Hu moments provide compact global shape descriptors, but they offer limited
+ability to separate visually similar activities, a limitation noted in prior
+template-based action recognition research~\cite{bobick2001}. Because all
+classifiers rely on the same low-dimensional representation, their performance
+is inherently constrained by the descriptive power of Hu moments.
+
+\subsection{Effect of Subject and Scene Variability}
+
+The dataset includes substantial intra-class variability: different subjects
+perform the same action with variations in body shape, clothing, motion style,
+and execution speed. Similar challenges in human action recognition datasets
+have been documented in earlier evaluations~\cite{schuldt2004recognizing}.
+Because Hu moment features extracted from MHI/MEI templates encode only coarse
+global motion shape, they are not expressive enough to disentangle these
+variations. Consequently, actions such as walking, jogging, and running—already
+visually similar—become even harder to discriminate when performed by different
+individuals under different conditions.
+
+\paragraph*{KNN exhibits pronounced overfitting.}
+KNN achieves nearly perfect training accuracy but shows a substantial drop in
+validation and test performance. This behavior is consistent with classical
+observations that KNN is highly sensitive to small variations when classes are
+not well separated in feature space~\cite{cover1967nearest}. In our case,
+overlapping Hu moment descriptors cause unstable nearest-neighbor
+relationships, limiting generalization.
+
+\paragraph*{SVM shows more stable generalization.}
+SVM avoids the extreme overfitting observed in KNN and produces more balanced
+performance across training and test sets. Prior work has shown that SVMs
+generalize effectively in low-dimensional settings with overlapping features by
+maximizing the decision margin~\cite{cortes1995support}. Nevertheless, their
+accuracy remains constrained by the limited separability inherent in Hu-based
+representations.
+
+\paragraph*{MLP performs comparably but is feature-limited.}
+Although MLPs can model nonlinear relationships, their performance does not
+substantially exceed that of SVM when trained on simple descriptors. Similar
+effects have been reported in earlier neural-network–based action analysis,
+where limited features restrict the benefits of nonlinear models. 
+Because the MLP receives only 14 global shape features, its expressive capacity
+is underutilized.
+
+\paragraph*{Upper-bound limitations.}
+Across all three classifiers, accuracy remains below higher performance
+thresholds due to factors commonly cited in template-based action-recognition
+systems: (i) compression of temporal information in silhouette templates,
+(ii) similarity among certain actions (walking, jogging, running), and
+(iii) subject-level variability~\cite{bobick2001, schuldt2004recognizing}. These
+factors contribute to classification ambiguity that is not fully resolved by
+Hu-based descriptors.
+
+Taken together, the analysis highlights that while classifier choice influences
+generalization behavior, the primary performance limitations stem from the
+restricted descriptive capacity of Hu moments.
+
+\subsection{Confusion Matrix Visualization}
+
+To further illustrate how each classifier distributes predictions across
+activity classes, Figures~\ref{fig:cm-svm}, \ref{fig:cm-knn}, and
+\ref{fig:cm-mlp} present the confusion matrices for SVM, KNN, and MLP. These
+matrices visualize class-specific behavior, including which actions are
+consistently recognized and where misclassifications occur.
+
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/metrics/cm_test_svm.png}
+    \caption{SVM classifier using Hu moment features.}
+    \label{fig:cm-svm}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/metrics/cm_test_knn.png}
+    \caption{KNN classifier using Hu moment features.}
+    \label{fig:cm-knn}
+\end{figure}
+
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=\linewidth]{figures/metrics/cm_test_mlp.png}
+    \caption{MLP classifier using Hu moment features.}
+    \label{fig:cm-mlp}
+\end{figure}

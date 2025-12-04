@@ -1,0 +1,268 @@
+\section{Related Work}
+\label{sec:related}
+
+\subsection{Motion Energy Images (MEI)}
+
+Motion Energy Images (MEI)~\cite{bobick2001}, 
+capture the spatial extent of motion over the most recent $\tau$ frames. MEI is 
+defined as a binary motion template:
+
+\begin{equation}
+E_{\tau}(x,y,t) =
+\begin{cases}
+1, & \text{if motion occurs in } [t-\tau, t], \\
+0, & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+In this formulation, motion is detected through thresholded frame differencing,
+following the classical temporal-template approach \cite{bobick2001}:
+
+\begin{equation}
+D(x,y,t) =
+\begin{cases}
+1, & |I(x,y,t) - I(x,y,t-1)| > \theta, \\
+0, & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+
+\subsubsection*{MEI Templates Across Six Actions}
+
+Figure~\ref{fig:mei-six} shows MEI templates for six representative actions
+(walking, jogging, running, boxing, hand waving, and hand clapping). These
+binary silhouettes highlight the overall spatial footprint of motion accumulated
+over time, revealing differences in limb usage, displacement, and body posture
+across actions.For walking, jogging, and running, the MEIs appear as large white blobs because the actor moves left-to-right and back across the frame. Since MEI represents the union of all motion regions over time, any pixel touched during these actions becomes active, resulting in a broad motion band.
+
+\begin{figure}[t]
+    \centering
+
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/walking_MEI.png}
+        \caption{Walking}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/jogging_MEI.png}
+        \caption{Jogging}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/running_MEI.png}
+        \caption{Running}
+    \end{subfigure}
+
+    \vspace{2pt}
+
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/boxing_MEI.png}
+        \caption{Boxing}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/waving_MEI.png}
+        \caption{Hand Waving}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/clapping_MEI.png}
+        \caption{Hand Clapping}
+    \end{subfigure}
+
+    \caption{MEI templates for six actions}
+    \label{fig:mei-six}
+\end{figure}
+
+
+
+\subsection{Motion History Images (MHI)}
+
+Motion History Images (MHI) encode the recency of motion by assigning larger
+intensity values to pixels where motion has occurred more recently:
+
+\begin{equation}
+M_{\tau}(x,y,t)=
+\begin{cases}
+\tau, & \text{if } B_{\tau}(x,y)=1, \\
+\max\{0, M_{\tau}(x,y,t-1)-1,0\}, & \text{if } B_{\tau}(x,y)=0.
+\end{cases}
+\end{equation}
+
+\subsubsection*{Binary Motion Mask and Background Subtraction}
+
+Both MEI and MHI use a binary motion mask derived from frame differencing:
+
+\begin{equation}
+B_{\tau}(x,y,t) =
+\begin{cases}
+1, & |I{\tau}(x,y) - I_{\tau-1}(x,y)|\geq \theta, \\
+0, & \text{otherwise}.
+\end{cases}
+\end{equation}
+
+This mask identifies regions of movement by comparing consecutive frames.
+Light smoothing can be applied before differencing to suppress noise.  
+Where MEI simply accumulates these binary masks, MHI applies temporal decay,
+producing a gradient that reflects *how motion evolves over time*.
+
+\subsection{Preliminaries: Image Moments and Normalized Central Moments}
+
+The Hu moment invariants used in this work are derived from standard image
+moment definitions~\cite{hu1962}. These expressions describe how spatial
+information in an image is aggregated and normalized to achieve invariance to
+translation, rotation, and scale.
+
+\paragraph*{Raw Image Moments.}
+Given an image intensity function $I(x,y)$, the $(p,q)$-th raw moment is
+defined as:
+\begin{equation}
+M_{pq} = \sum_{x}\sum_{y} x^{p}y^{q} I(x,y).
+\end{equation}
+
+\paragraph*{Centroid of the Image.}
+The centroid $(\bar{x}, \bar{y})$ is computed from the first-order raw moments:
+\begin{equation}
+\bar{x} = \frac{M_{10}}{M_{00}}, \qquad
+\bar{y} = \frac{M_{01}}{M_{00}}.
+\end{equation}
+
+\paragraph*{Central Moments.}
+Translation-invariant central moments are computed by shifting coordinates
+relative to the centroid:
+\begin{equation}
+\mu_{pq} = \sum_{x}\sum_{y} (x-\bar{x})^{p}(y-\bar{y})^{q} I(x,y).
+\end{equation}
+
+\paragraph*{Normalized Central Moments.}
+Scale-invariant normalized central moments are obtained as:
+\begin{equation}
+\nu_{pq} = 
+\frac{\mu_{pq}}
+     {\mu_{00}^{\,1+\frac{p+q}{2}}}.
+\end{equation}
+
+These normalized moments form the basis for the Hu invariant descriptors used
+in the next subsection, allowing activity templates such as MHI and MEI to be
+represented using compact shape measures that are invariant to geometric
+transformations.
+
+
+\subsubsection*{MHI Templates Across Six Actions}
+
+Figure~\ref{fig:mhi-six} displays MHI templates for the same six actions.
+Unlike MEI—which only shows where movement occurred—MHI distinguishes between
+recent and older motion. Brighter areas correspond to more recent movement,
+making MHI a richer temporal descriptor.
+
+\begin{figure}[t]
+    \centering
+
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/walking_MHI.png}
+        \caption{Walking}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/jogging_MHI.png}
+        \caption{Jogging}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/running_MHI.png}
+        \caption{Running}
+    \end{subfigure}
+
+    \vspace{2pt}
+
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/boxing_MHI.png}
+        \caption{Boxing}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/waving_MHI.png}
+        \caption{Hand Waving}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/clapping_MHI.png}
+        \caption{Hand Clapping}
+    \end{subfigure}
+
+    \caption{MHI templates for six actions.}
+    \label{fig:mhi-six}
+\end{figure}
+
+
+
+\subsection*{Evidence: Binary Motion Detection Across Time}
+
+To demonstrate the foundation upon which MEI and MHI are constructed,
+Figure~\ref{fig:binary-evidence} presents binary motion masks extracted at
+three different time instants\cite{bobick2001}. Each image is produced by thresholding pixel
+differences between consecutive frames, highlighting only the regions where
+motion occurred at that moment.
+
+These examples show how different actions produce distinct temporal patterns:
+locomotion actions such as walking and jogging generate smoother, periodic
+silhouettes, whereas high-frequency actions like boxing or hand clapping
+produce denser, rapidly changing motion regions.
+
+\begin{figure}[t]
+    \centering
+
+    % Disable (a), (b), (c) numbering
+    \captionsetup[subfigure]{labelformat=empty}
+
+    % Row 1
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/walking.png}
+        \caption{Walking (30,60,90)}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/jogging.png}
+        \caption{Jogging (30,60,90)}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/running.png}
+        \caption{Running (5,10,15)}
+    \end{subfigure}
+
+    \vspace{2pt}
+
+    % Row 2
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/boxing.png}
+        \caption{Boxing (30,60,90)}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/waving.png}
+        \caption{Waving (30,60,90)}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.3\linewidth}
+        \centering
+        \includegraphics[width=\linewidth]{figures/evidences/clapping.png}
+        \caption{Clapping(7,14,21)}
+    \end{subfigure}
+
+    {\small
+    \caption{Binary motion evidence at different frames is indicated in braces for each action sequence.
+    \label{fig:binary-evidence}
+}}
+
+\end{figure}
+
+
+
+
+

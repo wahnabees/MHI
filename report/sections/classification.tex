@@ -1,0 +1,71 @@
+\section{Classification}
+
+This work evaluates three supervised classifiers—SVM, KNN, and MLP—using Hu 
+moment descriptors extracted from MHI and MEI templates in the human action 
+dataset. The dataset was divided into a \textbf{75\% training, 15\% validation, 
+and 15\% test split}. This ensures that all models are evaluated consistently 
+while preventing overlap between subjects across splits. Because all models 
+operate on the same compact, low-dimensional feature representation, the 
+comparison highlights differences in how each classifier handles these 
+constraints rather than differences arising from the features themselves.
+
+\subsection{Dataset Split Overview}
+
+To provide a clear view of how the video samples were distributed across the 
+three subsets, Figure~\ref{fig:dataset-split} presents a simple histogram-style 
+visualization showing the number of videos assigned to training, validation, 
+and testing. 
+
+\begin{figure}[t]
+    \centering    
+    \includegraphics[width=\linewidth]{figures/metrics/trainingVSprediction.png}
+    \caption{Dataset split visualization showing the number of videos allocated 
+    to the 75/15/15 train–validation–test partitions.}
+    \label{fig:dataset-split}
+\end{figure}
+
+This visualization emphasizes that the majority of samples contribute to model 
+training, while dedicated validation and test subsets enable unbiased hyperparameter 
+tuning and final performance assessment.
+
+\subsection{k-Nearest Neighbors (KNN)}
+
+KNN assigns labels based on the nearest samples in the Hu-moment feature space. 
+Since it makes no assumptions about how classes should be separated, its 
+performance is strongly influenced by the structure and noise inherent in the 
+descriptors. Earlier studies have noted that KNN is particularly prone to 
+overfitting in low-dimensional spaces where class clusters lie close together 
+\cite{cover1967nearest}. This behavior is reflected in our dataset as well: 
+actions involving whole-body motion, such as walking, jogging, and running, 
+produce Hu features that overlap significantly. As a result, KNN performs 
+extremely well on the training data but struggles to generalize to new 
+sequences, where differences in subjects, motion style, lighting, or camera 
+instability cause small variations that shift samples across class boundaries.
+
+\subsection{Support Vector Machine (SVM)}
+
+SVM seeks a decision boundary that maximizes the margin between action classes 
+in the Hu-moment feature space. Because the descriptors are compact and the 
+classes partially overlap, margin-based separation is generally more robust 
+than distance-based approaches. This aligns with earlier work demonstrating the 
+effectiveness of SVMs in such settings \cite{cortes1995support}. In our 
+dataset, actions like walking, jogging, and running share similar global motion 
+patterns, which makes them difficult to separate cleanly. Even so, the SVM 
+maintains relatively stable generalization performance, handling variations in 
+subject appearance, execution speed, and recording conditions better than KNN.
+
+\subsection{Multi-Layer Perceptron (MLP)}
+
+The MLP introduces a simple neural network capable of modeling nonlinear 
+relationships in the feature space. Although neural networks typically excel 
+with rich, high-dimensional inputs \cite{rumelhart1986learning}, the MLP here 
+receives only a 14-dimensional Hu descriptor per frame. Because Hu moments 
+capture only coarse global structure, the network’s expressive capacity is not 
+fully utilized. As a result, the MLP behaves similarly to the SVM: it improves 
+slightly on some classes but is ultimately limited by the information available 
+in the Hu features. This reinforces the idea that the main challenge lies in 
+the representation rather than in the choice of classifier.
+
+Overall, the comparison indicates that when using compact global descriptors 
+such as Hu moments, classifier performance is largely constrained by feature 
+limitations rather than model complexity.

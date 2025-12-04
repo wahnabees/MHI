@@ -1,0 +1,38 @@
+\section{Results}
+\label{sec:results}
+
+This section presents the quantitative outcomes obtained from the three
+classifier configurations evaluated in this work. To avoid redundancy, we
+summarize all measured performance metrics in a single consolidated table
+(Table~\ref{tab:results-summary}). These values include training, validation,
+test, and video-level accuracy for each classifier trained on Hu moment
+descriptors extracted from MHI and MEI templates.
+
+\begin{table}[t]
+    \centering
+    \caption{Performance results for all classifiers using Hu moment features.}
+    \label{tab:results-summary}
+    \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Classifier} & \textbf{Train} & \textbf{Val} & \textbf{Test} & \textbf{Video Acc.} \\
+    \midrule
+    SVM (Hu)  & 0.764 & 0.577 & 0.514 & 0.627 \\
+    KNN (Hu)  & 1.000 & 0.476 & 0.453 & 0.651 \\
+    MLP (Hu)  & 0.748 & 0.553 & 0.512 & 0.627 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+    
+
+For completeness, confusion matrices for each classifier configuration were
+generated and are included as figures in the appendix or results section. These
+matrices illustrate the distribution of predicted labels across classes but are
+not interpreted here, as further discussion is provided in the Analysis section.
+
+In addition to accuracy values, the trained pipelines for each experiment
+(SVM, KNN, and MLP) were saved for reproducibility. The corresponding feature
+matrix dimensions reflect the use of Hu moment descriptors, resulting in a
+14-dimensional feature vector for every video frame.
+
+Overall, this section provides the factual quantitative outcomes used to
+support the discussion and insights elaborated in the following sections.
