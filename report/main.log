@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  3 DEC 2025 22:36
+This is pdfTeX, Version 3.141592653-2.6-1.40.27 (TeX Live 2025) (preloaded format=pdflatex 2025.3.8)  5 DEC 2025 02:28
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**/Users/karthiknagesh/Documents/GitHub/OMSCS/CS6476/MHI/report/main.tex
-(/Users/karthiknagesh/Documents/GitHub/OMSCS/CS6476/MHI/report/main.tex
+**/Users/karthiknagesh/Documents/GitHub/OMSCS/CS6476/Project/report/main.tex
+(/Users/karthiknagesh/Documents/GitHub/OMSCS/CS6476/Project/report/main.tex
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
 (/usr/local/texlive/2025/texmf-dist/tex/latex/ieeetran/IEEEtran.cls
@@ -645,32 +645,32 @@ Underfull \hbox (badness 4120) in paragraph at lines 37--1
 
 
 ]
-<figures/evidences/walking_MEI.png, id=144, 160.6pt x 120.45pt>
+<figures/evidences/walking_MEI.png, id=148, 160.6pt x 120.45pt>
 File: figures/evidences/walking_MEI.png Graphic file (type png)
 <use figures/evidences/walking_MEI.png>
 Package pdftex.def Info: figures/evidences/walking_MEI.png  used on input line 43.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/jogging_MEI.png, id=145, 160.6pt x 120.45pt>
+<figures/evidences/jogging_MEI.png, id=149, 160.6pt x 120.45pt>
 File: figures/evidences/jogging_MEI.png Graphic file (type png)
 <use figures/evidences/jogging_MEI.png>
 Package pdftex.def Info: figures/evidences/jogging_MEI.png  used on input line 48.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/running_MEI.png, id=146, 160.6pt x 120.45pt>
+<figures/evidences/running_MEI.png, id=150, 160.6pt x 120.45pt>
 File: figures/evidences/running_MEI.png Graphic file (type png)
 <use figures/evidences/running_MEI.png>
 Package pdftex.def Info: figures/evidences/running_MEI.png  used on input line 53.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/boxing_MEI.png, id=147, 160.6pt x 120.45pt>
+<figures/evidences/boxing_MEI.png, id=151, 160.6pt x 120.45pt>
 File: figures/evidences/boxing_MEI.png Graphic file (type png)
 <use figures/evidences/boxing_MEI.png>
 Package pdftex.def Info: figures/evidences/boxing_MEI.png  used on input line 61.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/waving_MEI.png, id=148, 160.6pt x 120.45pt>
+<figures/evidences/waving_MEI.png, id=152, 160.6pt x 120.45pt>
 File: figures/evidences/waving_MEI.png Graphic file (type png)
 <use figures/evidences/waving_MEI.png>
 Package pdftex.def Info: figures/evidences/waving_MEI.png  used on input line 66.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/clapping_MEI.png, id=149, 160.6pt x 120.45pt>
+<figures/evidences/clapping_MEI.png, id=153, 160.6pt x 120.45pt>
 File: figures/evidences/clapping_MEI.png Graphic file (type png)
 <use figures/evidences/clapping_MEI.png>
 Package pdftex.def Info: figures/evidences/clapping_MEI.png  used on input line 71.
@@ -682,62 +682,62 @@ Overfull \hbox (23.71878pt too wide) detected at line 92
 
 
 
-<figures/evidences/walking_MHI.png, id=152, 160.6pt x 120.45pt>
+<figures/evidences/walking_MHI.png, id=156, 160.6pt x 120.45pt>
 File: figures/evidences/walking_MHI.png Graphic file (type png)
 <use figures/evidences/walking_MHI.png>
 Package pdftex.def Info: figures/evidences/walking_MHI.png  used on input line 165.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/jogging_MHI.png, id=153, 160.6pt x 120.45pt>
+<figures/evidences/jogging_MHI.png, id=157, 160.6pt x 120.45pt>
 File: figures/evidences/jogging_MHI.png Graphic file (type png)
 <use figures/evidences/jogging_MHI.png>
 Package pdftex.def Info: figures/evidences/jogging_MHI.png  used on input line 170.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/running_MHI.png, id=154, 160.6pt x 120.45pt>
+<figures/evidences/running_MHI.png, id=158, 160.6pt x 120.45pt>
 File: figures/evidences/running_MHI.png Graphic file (type png)
 <use figures/evidences/running_MHI.png>
 Package pdftex.def Info: figures/evidences/running_MHI.png  used on input line 175.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/boxing_MHI.png, id=155, 160.6pt x 120.45pt>
+<figures/evidences/boxing_MHI.png, id=159, 160.6pt x 120.45pt>
 File: figures/evidences/boxing_MHI.png Graphic file (type png)
 <use figures/evidences/boxing_MHI.png>
 Package pdftex.def Info: figures/evidences/boxing_MHI.png  used on input line 183.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/waving_MHI.png, id=156, 160.6pt x 120.45pt>
+<figures/evidences/waving_MHI.png, id=160, 160.6pt x 120.45pt>
 File: figures/evidences/waving_MHI.png Graphic file (type png)
 <use figures/evidences/waving_MHI.png>
 Package pdftex.def Info: figures/evidences/waving_MHI.png  used on input line 188.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/clapping_MHI.png, id=157, 160.6pt x 120.45pt>
+<figures/evidences/clapping_MHI.png, id=161, 160.6pt x 120.45pt>
 File: figures/evidences/clapping_MHI.png Graphic file (type png)
 <use figures/evidences/clapping_MHI.png>
 Package pdftex.def Info: figures/evidences/clapping_MHI.png  used on input line 193.
 (pdftex.def)             Requested size: 75.60077pt x 56.70155pt.
-<figures/evidences/walking.png, id=160, 481.8pt x 240.9pt>
+<figures/evidences/walking.png, id=164, 481.8pt x 240.9pt>
 File: figures/evidences/walking.png Graphic file (type png)
 <use figures/evidences/walking.png>
 Package pdftex.def Info: figures/evidences/walking.png  used on input line 225.
 (pdftex.def)             Requested size: 75.60077pt x 37.79858pt.
-<figures/evidences/jogging.png, id=161, 481.8pt x 240.9pt>
+<figures/evidences/jogging.png, id=165, 481.8pt x 240.9pt>
 File: figures/evidences/jogging.png Graphic file (type png)
 <use figures/evidences/jogging.png>
 Package pdftex.def Info: figures/evidences/jogging.png  used on input line 230.
 (pdftex.def)             Requested size: 75.60077pt x 37.79858pt.
-<figures/evidences/running.png, id=162, 481.8pt x 240.9pt>
+<figures/evidences/running.png, id=166, 481.8pt x 240.9pt>
 File: figures/evidences/running.png Graphic file (type png)
 <use figures/evidences/running.png>
 Package pdftex.def Info: figures/evidences/running.png  used on input line 235.
 (pdftex.def)             Requested size: 75.60077pt x 37.79858pt.
-<figures/evidences/boxing.png, id=163, 481.8pt x 240.9pt>
+<figures/evidences/boxing.png, id=167, 481.8pt x 240.9pt>
 File: figures/evidences/boxing.png Graphic file (type png)
 <use figures/evidences/boxing.png>
 Package pdftex.def Info: figures/evidences/boxing.png  used on input line 244.
 (pdftex.def)             Requested size: 75.60077pt x 37.79858pt.
-<figures/evidences/waving.png, id=164, 481.8pt x 240.9pt>
+<figures/evidences/waving.png, id=168, 481.8pt x 240.9pt>
 File: figures/evidences/waving.png Graphic file (type png)
 <use figures/evidences/waving.png>
 Package pdftex.def Info: figures/evidences/waving.png  used on input line 249.
 (pdftex.def)             Requested size: 75.60077pt x 37.79858pt.
-<figures/evidences/clapping.png, id=165, 481.8pt x 240.9pt>
+<figures/evidences/clapping.png, id=169, 481.8pt x 240.9pt>
 File: figures/evidences/clapping.png Graphic file (type png)
 <use figures/evidences/clapping.png>
 Package pdftex.def Info: figures/evidences/clapping.png  used on input line 254.
@@ -745,7 +745,7 @@ Package pdftex.def Info: figures/evidences/clapping.png  used on input line 254.
 ) (./sections/classification.tex
 
 [2 <./figures/evidences/walking_MEI.png (PNG copy)> <./figures/evidences/jogging_MEI.png (PNG copy)> <./figures/evidences/running_MEI.png (PNG copy)> <./figures/evidences/boxing_MEI.png (PNG copy)> <./figures/evidences/waving_MEI.png (PNG copy)> <./figures/evidences/clapping_MEI.png (PNG copy)> <./figures/evidences/walking_MHI.png (PNG copy)> <./figures/evidences/jogging_MHI.png (PNG copy)> <./figures/evidences/running_MHI.png (PNG copy)> <./figures/evidences/boxing_MHI.png (PNG copy)> <./figures/evidences/waving_MHI.png (PNG copy)> <./figures/evidences/clapping_MHI.png (PNG copy)>]
-<figures/metrics/trainingVSprediction.png, id=191, 433.62pt x 289.08pt>
+<figures/metrics/trainingVSprediction.png, id=195, 433.62pt x 289.08pt>
 File: figures/metrics/trainingVSprediction.png Graphic file (type png)
 <use figures/metrics/trainingVSprediction.png>
 Package pdftex.def Info: figures/metrics/trainingVSprediction.png  used on input line 21.
@@ -756,17 +756,17 @@ Package pdftex.def Info: figures/metrics/trainingVSprediction.png  used on input
 
 [3 <./figures/evidences/walking.png (PNG copy)> <./figures/evidences/jogging.png (PNG copy)> <./figures/evidences/running.png (PNG copy)> <./figures/evidences/boxing.png (PNG copy)> <./figures/evidences/waving.png (PNG copy)> <./figures/evidences/clapping.png (PNG copy)> <./figures/metrics/trainingVSprediction.png>]
 
-<figures/metrics/cm_test_svm.png, id=216, 578.16pt x 433.62pt>
+<figures/metrics/cm_test_svm.png, id=220, 578.16pt x 433.62pt>
 File: figures/metrics/cm_test_svm.png Graphic file (type png)
 <use figures/metrics/cm_test_svm.png>
 Package pdftex.def Info: figures/metrics/cm_test_svm.png  used on input line 80.
 (pdftex.def)             Requested size: 252.0pt x 189.00032pt.
-<figures/metrics/cm_test_knn.png, id=217, 578.16pt x 433.62pt>
+<figures/metrics/cm_test_knn.png, id=221, 578.16pt x 433.62pt>
 File: figures/metrics/cm_test_knn.png Graphic file (type png)
 <use figures/metrics/cm_test_knn.png>
 Package pdftex.def Info: figures/metrics/cm_test_knn.png  used on input line 87.
 (pdftex.def)             Requested size: 252.0pt x 189.00032pt.
-<figures/metrics/cm_test_mlp.png, id=218, 578.16pt x 433.62pt>
+<figures/metrics/cm_test_mlp.png, id=222, 578.16pt x 433.62pt>
 File: figures/metrics/cm_test_mlp.png Graphic file (type png)
 <use figures/metrics/cm_test_mlp.png>
 Package pdftex.def Info: figures/metrics/cm_test_mlp.png  used on input line 94.
@@ -775,23 +775,24 @@ Package pdftex.def Info: figures/metrics/cm_test_mlp.png  used on input line 94.
 
 [4 <./figures/metrics/cm_test_svm.png> <./figures/metrics/cm_test_knn.png>]) (./sections/improvements.tex
 
-File: figures/metrics/cm_test_mlp.png Graphic file (type png)
-<use figures/metrics/cm_test_mlp.png>
-Package pdftex.def Info: figures/metrics/cm_test_mlp.png  used on input line 66.
+
+Underfull \hbox (badness 3291) in paragraph at lines 33--37
+[]\OT1/ptm/b/n/10 Preserving spa-tial struc-ture: \OT1/ptm/m/n/10 Lower-body mo-tion,
+ []
+
+
+Overfull \hbox (13.34305pt too wide) in paragraph at lines 71--79
+ [][] 
+ []
+
+<figures/metrics/svm-improved-test.png, id=241, 578.16pt x 433.62pt>
+File: figures/metrics/svm-improved-test.png Graphic file (type png)
+<use figures/metrics/svm-improved-test.png>
+Package pdftex.def Info: figures/metrics/svm-improved-test.png  used on input line 90.
 (pdftex.def)             Requested size: 252.0pt x 189.00032pt.
 
-Underfull \hbox (badness 1424) in paragraph at lines 78--79
-[]\OT1/ptm/m/n/10 cleaner MHI/MEI tem-plates achieved through tuned
- []
 
-
-Underfull \hbox (badness 5091) in paragraph at lines 79--80
-[]\OT1/ptm/m/n/10 classifier-specific hy-per-pa-ram-e-ter ad-just-ments (SVM
- []
-
-) (./sections/future_work.tex
-
-[5 <./figures/metrics/cm_test_mlp.png>]
+[5 <./figures/metrics/cm_test_mlp.png>]) (./sections/future_work.tex
 
 ) (./sections/references.tex)
 
@@ -812,7 +813,7 @@ pdfTeX warning (ext4): destination with the same identifier (name{cite.klaser200
 <argument> ...shipout:D \box_use:N \l_shipout_box 
                                                   \__shipout_drop_firstpage_...
 l.38 \end{document}
-                   ] (./main.aux)
+                    <./figures/metrics/svm-improved-test.png>] (./main.aux)
  ***********
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -822,21 +823,21 @@ L3 programming layer <2025-01-18>
 LaTeX Warning: There were multiply-defined labels.
 
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: B9FF759A78AC64A24AF7E2A5E88271B8;4777.
+(rerunfilecheck)             Checksum: AAFC4C3883CF43803AB10A24748FBC23;4889.
  ) 
 Here is how much of TeX's memory you used:
- 23140 strings out of 473190
- 437751 string characters out of 5715801
- 821830 words of memory out of 5000000
- 45934 multiletter control sequences out of 15000+600000
+ 23152 strings out of 473190
+ 438163 string characters out of 5715801
+ 821911 words of memory out of 5000000
+ 45944 multiletter control sequences out of 15000+600000
  598976 words of font info for 114 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,9n,91p,476b,521s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,9n,91p,523b,526s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr5.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2025/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on main.pdf (6 pages, 887754 bytes).
+Output written on main.pdf (6 pages, 930865 bytes).
 PDF statistics:
- 338 PDF objects out of 1000 (max. 8388607)
+ 340 PDF objects out of 1000 (max. 8388607)
  273 compressed objects within 3 object streams
- 76 named destinations out of 1000 (max. 500000)
- 331 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 78 named destinations out of 1000 (max. 500000)
+ 344 words of extra memory for PDF output out of 10000 (max. 10000000)
 

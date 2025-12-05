@@ -52,22 +52,18 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Confusion Matrix Visualization}{4}{subsection.4.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {V}Results}{4}{section.5}\protected@file@percent }
 \newlabel{sec:results}{{V}{4}{Results}{section.5}{}}
-\citation{bobick2001}
-\citation{cortes1995support}
-\citation{schuldt2004recognizing}
-\citation{cover1967nearest}
-\citation{yang2007evaluating}
-\citation{bobick2001}
 \@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces MLP classifier using Hu moment features.}}{5}{figure.caption.20}\protected@file@percent }
 \newlabel{fig:cm-mlp}{{7}{5}{MLP classifier using Hu moment features}{figure.caption.20}{}}
 \@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Performance results for all classifiers using Hu moment features.}}{5}{table.caption.21}\protected@file@percent }
 \newlabel{tab:results-summary}{{I}{5}{Performance results for all classifiers using Hu moment features}{table.caption.21}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {VI}Improvements}{5}{section.6}\protected@file@percent }
 \newlabel{sec:improvements}{{VI}{5}{Improvements}{section.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Effect of Motion Template Parameters}{5}{subsection.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}Classifier-Level Refinements}{5}{subsection.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-C}}Evidence of Improved Hu-Based Classification}{5}{subsection.6.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-D}}Summary of Improvements}{5}{subsection.6.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Feature Expansion: From 14D Hu Moments to a 20D Motion Descriptor}{5}{subsection.6.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Comparison of SVM performance before and after adding auxiliary motion features.}}{5}{table.caption.22}\protected@file@percent }
+\newlabel{tab:improvement-comparison}{{II}{5}{Comparison of SVM performance before and after adding auxiliary motion features}{table.caption.22}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}Parameter Calibration}{5}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-C}}Performance Comparison}{5}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-D}}Confusion Matrix Evidence}{5}{subsection.6.4}\protected@file@percent }
 \citation{dalal2005}
 \citation{simonyan2014twostream}
 \citation{ji2013cnn}
@@ -85,8 +81,9 @@
 \bibcite{cortes1995support}{12}
 \bibcite{rumelhart1986learning}{13}
 \bibcite{ji2013cnn}{14}
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Confusion matrix of the best-performing classifier trained on Hu moments. The strengthened diagonal structure reflects improved class separability after preprocessing and parameter tuning.}}{6}{figure.caption.22}\protected@file@percent }
-\newlabel{fig:cm-improvements-hu}{{8}{6}{Confusion matrix of the best-performing classifier trained on Hu moments. The strengthened diagonal structure reflects improved class separability after preprocessing and parameter tuning}{figure.caption.22}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Confusion matrix of the improved SVM classifier using Hu moments plus auxiliary motion features. Strengthened diagonal entries reflect clearer class separation.}}{6}{figure.caption.23}\protected@file@percent }
+\newlabel{fig:cm-improvements-svm}{{8}{6}{Confusion matrix of the improved SVM classifier using Hu moments plus auxiliary motion features. Strengthened diagonal entries reflect clearer class separation}{figure.caption.23}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-E}}Summary}{6}{subsection.6.5}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VII}Future Work}{6}{section.7}\protected@file@percent }
 \newlabel{sec:future}{{VII}{6}{Future Work}{section.7}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-A}}Richer Spatial Descriptors: HOG Features}{6}{subsection.7.1}\protected@file@percent }
@@ -94,5 +91,5 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VII-C}}Temporal Modeling Beyond Static Templates}{6}{subsection.7.3}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {VIII}References}{6}{section.8}\protected@file@percent }
 \newlabel{sec:references}{{VIII}{6}{References}{section.8}{}}
-\@writefile{toc}{\contentsline {section}{References}{6}{section*.23}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{References}{6}{section*.24}\protected@file@percent }
 \gdef \@abspage@last{6}

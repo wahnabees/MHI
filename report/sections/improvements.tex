@@ -1,86 +1,107 @@
 \section{Improvements}
 \label{sec:improvements}
 
-This section describes the refinements made during experimentation that led to
-observable improvements in classification accuracy when using Hu moment
-features with SVM, KNN, and MLP. The focus here is not on comparing feature
-types, but on understanding how adjustments to preprocessing, motion template
-construction, and classifier configuration strengthened performance within the
-Hu-based system.
+After evaluating SVM, KNN, and MLP on Hu moment features, SVM consistently
+offered the most stable performance. It was therefore selected as the primary
+candidate for improvement. The refinements described below build on a baseline
+Hu-only model that had already been tuned to a reasonable level before
+additional enhancements were introduced.
 
-\subsection{Effect of Motion Template Parameters}
+\subsection{Feature Expansion: From 14D Hu Moments to a 20D Motion Descriptor}
 
-Early experiments showed that the quality of the MHI and MEI templates had a
-significant impact on downstream classification accuracy, consistent with
-observations in earlier temporal-template work~\cite{bobick2001}. Small
-adjustments to the motion threshold $\theta$ in the frame-differencing step and
-the temporal decay parameter $\tau$ produced cleaner silhouettes and reduced
-noise artifacts. Cleaned motion templates yielded Hu moment features that were
-more consistent across sequences and subjects.
+The original feature representation consisted of 14 values: the seven Hu
+moments extracted from the MHI and the seven Hu moments extracted from the MEI.
+While compact and effective for capturing global shape, this 14D descriptor
+omits several important characteristics of human motion, such as intensity,
+localization, and temporal variability. To address this limitation, six
+additional motion descriptors were introduced, expanding the feature vector
+from 14 to 20 dimensions.
 
-These refinements were particularly beneficial for SVM, which relies on
-well-separated feature distributions to construct stable decision boundaries.
-Reducing template noise improved class separability and produced measurable
-gains in validation and test accuracy, consistent with findings on margin-based
-methods in low-dimensional settings~\cite{cortes1995support}.
-
-\subsection{Classifier-Level Refinements}
-
-Each classifier required careful tuning to maximize performance with Hu
-moments:
+This expansion strengthens the representation in three key ways:
 
 \begin{itemize}
-    \item \textbf{SVM:} Adjusting the penalty parameter $C$ and kernel width
-    $\gamma$ led to smoother margins and reduced overfitting, a common effect
-    observed in SVM-based action classification~\cite{schuldt2004recognizing}.
+    \item \textbf{Capturing motion magnitude:} Aggregated motion-pixel counts
+    provide a direct measure of how much motion occurs in a frame, helping
+    distinguish high-intensity actions (running, boxing) from lower-intensity
+    ones (walking).
 
-    \item \textbf{KNN:} The number of neighbors $k$ had a strong impact on
-    generalization. Lower values (e.g., $k=1$) memorized the training set but
-    resulted in inconsistent test accuracy. Slightly higher $k$ stabilized
-    predictions across classes, aligning with classical insights on the
-    trade-off between noise sensitivity and neighborhood size~\cite{cover1967nearest}.
+    \item \textbf{Encoding temporal dynamics:} Features such as the frame-to-frame
+    change in the MHI and the short-term standard deviation of motion quantify
+    how stable, periodic, or bursty an action is—properties not encoded by Hu
+    moments.
 
-    \item \textbf{MLP:} Even though Hu moments are low-dimensional, tuning the
-    hidden layer size and regularization strength helped prevent the network
-    from overfitting to small variations in the feature space. Similar effects
-    have been reported in early learning-based action-recognition systems
-    where simple descriptors limit the benefits of neural models~\cite{yang2007evaluating}.
+    \item \textbf{Preserving spatial structure:} Lower-body motion, central-region
+    motion, and central-to-side ratios describe how motion is distributed
+    across the frame. These cues differentiate actions with similar overall
+    silhouettes but different spatial emphasis (e.g., running vs.~boxing).
 \end{itemize}
 
-These model-level refinements showed that small hyperparameter adjustments
-improved classifier stability even when the feature representation remained
-unchanged.
+By augmenting the Hu feature space with these lightweight descriptors, the SVM
+operates in a richer but still low-dimensional space where classes are more
+separable. This expansion from 14D to 20D significantly enhances the model’s
+ability to discriminate between actions with subtle motion differences, as
+validated by improved validation and video-level accuracy.
 
-\subsection{Evidence of Improved Hu-Based Classification}
 
-Figure~\ref{fig:cm-improvements-hu} shows the confusion matrix of the
-best-performing Hu-based model in this study. Compared to earlier runs, the
-confusion matrix exhibits a more pronounced diagonal and fewer cross-class
-confusions, indicating improved discriminability between activities. Such
-improvements are consistent with findings that cleaner silhouettes and stable
-feature extraction reduce ambiguity in template-based recognition
-systems~\cite{bobick2001}.
+\subsection{Parameter Calibration}
+
+Several parameters controlling MHI/MEI construction were adjusted:
+
+\begin{itemize}
+    \item $\tau$ (decay): balanced temporal smoothing vs.~motion persistence,
+    \item $\theta$ (threshold): reduced noise in motion masks,
+    \item $k\_size$ (Gaussian blur): stabilized differencing,
+    \item reset frequency: prevented MHI saturation.
+\end{itemize}
+
+These refinements produced cleaner templates and more reliable features, helping
+the SVM separate visually similar actions such as walking, jogging, and
+running.
+
+\subsection{Performance Comparison}
+
+Table~\ref{tab:improvement-comparison} summarizes the improvement over the
+baseline Hu-only SVM. The largest gain appears in video-level accuracy, rising
+from approximately 0.63 to over 0.80.
+
+\begin{table}[t]
+\centering
+\caption{Comparison of SVM performance before and after adding auxiliary motion features.}
+\label{tab:improvement-comparison}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Model} & \textbf{Train} & \textbf{Val} & \textbf{Test} & \textbf{Video Acc.} \\
+\midrule
+Baseline SVM (Hu-only) & 0.764 & 0.577 & 0.514 & 0.627 \\
+Improved SVM (Hu + extra feats) & 0.939 & 0.682 & 0.622 & 0.807 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Confusion Matrix Evidence}
+
+Figure~\ref{fig:cm-improvements-svm} shows the confusion matrix of the improved
+model. Compared to earlier runs, the diagonal is noticeably stronger and
+confusions between locomotion classes are substantially reduced. This reflects
+the added discriminative value of the auxiliary motion descriptors.
 
 \begin{figure}[t]
-    \centering
-    \includegraphics[width=\linewidth]{figures/metrics/cm_test_mlp.png}
-    \caption{Confusion matrix of the best-performing classifier trained on Hu
-    moments. The strengthened diagonal structure reflects improved class
-    separability after preprocessing and parameter tuning.}
-    \label{fig:cm-improvements-hu}
+    \centering    
+    \includegraphics[width=\linewidth]{figures/metrics/svm-improved-test.png}
+    \caption{Confusion matrix of the improved SVM classifier using Hu moments
+    plus auxiliary motion features. Strengthened diagonal entries reflect
+    clearer class separation.}
+    \label{fig:cm-improvements-svm}
 \end{figure}
 
-\subsection{Summary of Improvements}
+\subsection{Summary}
 
-Across all refinements, the most impactful improvements within the Hu-based
-pipeline were:
+Overall, the improvements result from:
 \begin{itemize}
-    \item cleaner MHI/MEI templates achieved through tuned thresholds and decay parameters,
-    \item classifier-specific hyperparameter adjustments (SVM margin tuning, KNN neighbor selection, MLP regularization),
-    \item improved stability and consistency in Hu moment features extracted from motion templates.
+    \item a richer feature set augmenting Hu moments,
+    \item calibrated motion-template parameters,
+    \item cleaner and more stable MHI/MEI representations.
 \end{itemize}
 
-These improvements enhanced the overall robustness of the Hu-based system,
-even though the inherent simplicity of Hu descriptors sets an upper limit on
-accuracy. Future work may explore richer descriptors such as HOG or deep
-features to overcome these feature-level constraints.
+These changes enabled the SVM to outperform all earlier Hu-based models while
+preserving interpretability and computational simplicity.

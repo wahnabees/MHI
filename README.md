@@ -64,7 +64,6 @@ demo_inputs/
 ```
 
 
-
 ---
 
 # Running Classification Demos
@@ -78,7 +77,7 @@ You may optionally specify `--frames` to visualize intermediate MHI states but b
 ## Waving Example
 
 ```bash
-python3 mhi_demo.py --video demo_inputs/clip00494_4_2.avi --model models/svm-model
+python3 mhi_demo.py --video demo_inputs/clip00494_4_2.avi --model models/svm-model 
 ```
 
 ---
@@ -86,7 +85,7 @@ python3 mhi_demo.py --video demo_inputs/clip00494_4_2.avi --model models/svm-mod
 ## Running Example
 
 ```bash
-python3 mhi_demo.py --video demo_inputs/clip00240_2_0.avi --model models/svm-model --frames 5 10 15
+python3 mhi_demo.py --video demo_inputs/clip00240_2_0.avi --model models/svm-model --frames 5 10 15 
 ```
 
 ---
@@ -95,7 +94,7 @@ python3 mhi_demo.py --video demo_inputs/clip00240_2_0.avi --model models/svm-mod
 ## Jogging Example
 
 ```bash
-python3 mhi_demo.py --video demo_inputs/clip00100_1_0.avi --model models/mlp-model-hu
+python3 mhi_demo.py --video demo_inputs/clip00100_1_0.avi --model models/svm-model --frames 30 35 40  
 ```
 
 ---
@@ -103,7 +102,7 @@ python3 mhi_demo.py --video demo_inputs/clip00100_1_0.avi --model models/mlp-mod
 ## Boxing Example
 
 ```bash
-python3 mhi_demo.py --video demo_inputs/clip00308_3_0.avi --model models/svm-model
+python3 mhi_demo.py --video demo_inputs/clip00308_3_0.avi --model models/svm-model 
 ```
 
 ---
@@ -111,20 +110,21 @@ python3 mhi_demo.py --video demo_inputs/clip00308_3_0.avi --model models/svm-mod
 ## Handclapping Example
 
 ```bash
-python3 mhi_demo.py --video demo_inputs/clip00508_5_0.avi --model models/svm-model --frames 7 14 21
+python3 mhi_demo.py --video demo_inputs/clip00508_5_0.avi --model models/svm-model --frames 7 14 21 
 ```
 
 
 ## Walking Example
 
 ```bash
-python3 mhi_demo.py --video demo_inputs/clip00006_0_2.avi --model models/svm-model
+python3 mhi_demo.py --video demo_inputs/clip00006_0_2.avi --model models/svm-model 
 ```
 
 ---
 
 # Notes
 
+* If you want any other model to be used please replace it with mlp-model, knn-model or svn-model-basic to test the same videos. 
 * The `--frames` argument is optional and shows intermediate MHI snapshots.
 * The report covers above videos and its frames. 
 * Once you run the above commands you should be able to see all the generated videos/images as below 
@@ -186,11 +186,17 @@ models/
 
 ---
 
-## 1. Train SVM Model (Hu Features)
+## 1a. Train SVM Model with Additional Features(Hu Features)
+
+```bash
+python3 mhi_main.py --root kth_local_avi --output svm-model --classifier svm --mhi_feature_type hu --add_features True
+```
+## 1b. Train SVM Model without Additional Features(Hu Features)
 
 ```bash
 python3 mhi_main.py --root kth_local_avi --output svm-model --classifier svm --mhi_feature_type hu
 ```
+
 
 ## 2. Train KNN Model (Hu Features)
 

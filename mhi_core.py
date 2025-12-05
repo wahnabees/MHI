@@ -11,7 +11,7 @@ from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.pipeline import Pipeline
 from sklearn.neural_network import MLPClassifier
 from skimage.feature import hog
-from collections import Counter
+from collections import Counter,deque
 
 import joblib
 
@@ -23,9 +23,10 @@ class MotionFeatureConfig:
     thresh:int=20
     resize_width:Optional[int]=220
     blur_sigma:Optional[float]=1.0
-    k_size:int=7
+    k_size:int=9
     sigma:float=1.0
     frames_reset_freq:int=40
+    add_features:bool=False
 
 
 
@@ -161,11 +162,13 @@ def _extract_hu_features_from_mhi(mhi_img:np.ndarray)->np.ndarray:
 
 
 
-
-
 def get_mhi_features_from_video(video_path:str,cfg:MotionFeatureConfig)->np.ndarray:
     cap=cv2.VideoCapture(video_path)
     ok,frame=cap.read()
+    if not ok:
+        cap.release()
+        print(f"[get_mhi_features_from_video] Could not read first frame from {video_path}")
+        return np.empty((0,0),dtype=np.float32)
 
     def preprocess(f):
         if f.ndim==3:
@@ -179,16 +182,20 @@ def get_mhi_features_from_video(video_path:str,cfg:MotionFeatureConfig)->np.ndar
     prev=preprocess(frame)
     h,w=prev.shape
     mhi=np.zeros((h,w),dtype=np.float32)
-
     mei=np.zeros((h,w),dtype=np.uint8)
+
     frames_reset_freq=int(getattr(cfg,"frames_reset_freq",20))
     tau=float(getattr(cfg,"tau",240))
     theta=float(getattr(cfg,"thresh",15))
-    frames_counter=0
 
+    frames_counter=0
     features=[]
     frame_idx=0
     kernel=cv2.getStructuringElement(cv2.MORPH_ELLIPSE,(3,3))
+
+    use_extra=bool(getattr(cfg,"add_features",False))
+    prev_mhi_for_change=None
+    motion_history=deque(maxlen=10)
 
     while True:
         ok,frame=cap.read()
@@ -199,7 +206,6 @@ def get_mhi_features_from_video(video_path:str,cfg:MotionFeatureConfig)->np.ndar
         diff=cv2.absdiff(curr,prev)
 
         bin_mask=(diff>theta).astype(np.uint8)
-
         bin_mask=cv2.morphologyEx(bin_mask,cv2.MORPH_GRADIENT,kernel)
         motion_present=np.count_nonzero(bin_mask)>0
 
@@ -223,15 +229,63 @@ def get_mhi_features_from_video(video_path:str,cfg:MotionFeatureConfig)->np.ndar
             else:
                 raise ValueError(f"Unknown mhi_feature_type:{feature_type}")
 
-            feats=np.concatenate([feats_mhi,feats_mei])
+            base_feats=np.concatenate([feats_mhi,feats_mei],axis=0)
+
+            if use_extra:
+                H,W=bin_mask.shape
+
+                motion_pixels=float(np.count_nonzero(bin_mask))
+                motion_history.append(motion_pixels)
+                motion_std=float(np.std(motion_history)) if len(motion_history)>1 else 0.0
+
+                if prev_mhi_for_change is not None:
+                    mhi_diff=np.abs(mhi-prev_mhi_for_change)
+                    avg_temporal_change=float(mhi_diff.mean())
+                else:
+                    avg_temporal_change=0.0
+                prev_mhi_for_change=mhi.copy()
+
+                lower=bin_mask[H//2:,:]
+                motion_pixels_lower=float(np.count_nonzero(lower))
+
+                x1,x2=W//3,2*W//3
+                central=bin_mask[:,x1:x2]
+                motion_pixels_central=float(np.count_nonzero(central))
+
+                left=bin_mask[:,:W//3]
+                right=bin_mask[:,2*W//3:]
+                motion_left=float(np.count_nonzero(left))
+                motion_right=float(np.count_nonzero(right))
+                side_motion=motion_left+motion_right
+                central_ratio=motion_pixels_central/(side_motion+1e-6)
+
+                extra_feats=np.array(
+                    [
+                        motion_pixels,
+                        avg_temporal_change,
+                        motion_pixels_lower,
+                        motion_std,
+                        motion_pixels_central,
+                        central_ratio,
+                    ],
+                    dtype=np.float32,
+                )
+
+                feats=np.concatenate([base_feats,extra_feats],axis=0)
+            else:
+                feats=base_feats
+
             features.append(feats)
 
         frame_idx+=1
         prev=curr
         frames_counter+=1
+
         if frames_counter>=frames_reset_freq:
             mhi.fill(0.0)
             frames_counter=0
+            prev_mhi_for_change=None
+            motion_history.clear()
 
     cap.release()
 
@@ -251,6 +305,8 @@ def train_motion_classifier(X,y,classifier_type="svm",random_state=0):
         param_grid={
             "clf__C":[1,10,100,1000],
             "clf__gamma":["scale",0.01,0.001],
+            # "clf__C":[0.1, 1, 10, 100, 1000],
+            # "clf__gamma":["scale",0.01,0.001],
         }
     elif classifier_type=="knn":
         clf=KNeighborsClassifier()

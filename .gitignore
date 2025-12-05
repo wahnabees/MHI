@@ -2,3 +2,10 @@
 /__pycache__
 /kth_local_avi
 .DS_Store
+report/main.aux
+report/main.fdb_latexmk
+report/main.fls
+report/main.log
+report/main.out
+report/main.synctex.gz
+/__pycache__

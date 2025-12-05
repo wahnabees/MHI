@@ -50,10 +50,14 @@ def main():
     parser.add_argument("--root",type=str,required=True,help="Root directory of KTH dataset (containing videos).")
     parser.add_argument("--output",type=str,default="svm-model",help="Path to save trained pipeline (joblib file).")
     parser.add_argument("--classifier",type=str,choices=["svm","knn","mlp"],default="svm",help="Classifier type: 'svm', 'knn', or 'mlp' (default: svm).")
-    parser.add_argument("--tau",type=int,default=40,help="MHI duration in frames (tau). Default: 20.")
-    parser.add_argument("--thresh",type=int,default=20,help="Frame difference threshold for motion. Default: 30.")
-    parser.add_argument("--resize_width",type=int,default=220,help="Max width for resizing frames. Use <=0 to disable. Default: 160.")
+
+    parser.add_argument("--tau",type=int,default=40,help="MHI duration in frames (tau). Default: 40.")
+    parser.add_argument("--thresh",type=int,default=20,help="Frame difference threshold for motion. Default: 20.")
+    parser.add_argument("--resize_width",type=int,default=220,help="Max width for resizing frames. Use <=0 to disable. Default: 220.")
     parser.add_argument("--blur_sigma",type=float,default=1.0,help="Gaussian blur sigma. Use <=0 to disable. Default: 1.0.")
+    parser.add_argument("--add_features",type=bool,default=False,help="Additional Features apart from 14.")
+
+
     parser.add_argument("--mhi_feature_type",type=str,choices=["hu","hog"],default="hu",help="Type of features to extract from MHI/MEI: 'hu' for Hu moments, 'hog' for HOG descriptors.")
     args=parser.parse_args()
 
@@ -78,7 +82,8 @@ def main():
 
     resize_width=args.resize_width if args.resize_width>0 else None
     blur_sigma=args.blur_sigma if args.blur_sigma>0 else None
-    cfg=MotionFeatureConfig(tau=args.tau,thresh=args.thresh,resize_width=resize_width,blur_sigma=blur_sigma)
+    add_features=args.add_features
+    cfg=MotionFeatureConfig(tau=args.tau,thresh=args.thresh,resize_width=resize_width,blur_sigma=blur_sigma,add_features=add_features)
     cfg.mhi_feature_type=args.mhi_feature_type
 
     print("Building training dataset")
