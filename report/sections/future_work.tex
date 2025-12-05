@@ -1,44 +1,37 @@
 \section{Future Work}
 \label{sec:future}
 
-The results obtained using Hu moments across SVM, KNN, and MLP indicate that
-the primary bottleneck lies in the limited expressive power of the features
-rather than in the classifiers themselves. To overcome these constraints and
-achieve higher recognition accuracy, several focused directions offer strong
-potential for improvement.
+The results obtained using Hu moments across SVM, KNN, and MLP suggest that the
+main limitation lies in the expressiveness of the features rather than the
+classifiers. Improving the quality of the descriptors is therefore the most
+promising direction for increasing recognition accuracy. Several focused
+extensions are outlined below.
 
 \subsection{Richer Spatial Descriptors: HOG Features}
 
-Since Hu moments capture only coarse global shape, a natural next step is to
-explore more expressive handcrafted descriptors. Histogram of Oriented
-Gradients (HOG) provides detailed local gradient information and has been shown
-to be highly effective for human-related classification tasks~\cite{dalal2005}.
-Incorporating HOG features into the same MHI/MEI pipeline would allow a direct
-comparison against Hu moments and may significantly strengthen class
-separability.
+Hu moments capture only coarse global shape. Incorporating more expressive
+handcrafted descriptors such as Histograms of Oriented Gradients (HOG) could
+provide finer spatial detail and strengthen class separability. Since the
+existing MHI/MEI pipeline already supports gradient-based representations, HOG
+offers a natural next step for comparison and improvement.
 
 \subsection{Deep Feature Extraction Using CNNs}
 
-Deep convolutional neural networks can learn high-level spatial representations
-directly from image data. CNN-based feature extraction has proven highly
-effective for action recognition when applied to appearance or motion cues,
-including silhouette-style inputs and video frames~\cite{simonyan2014twostream}.
-Applying such models to MHI/MEI templates—or directly to grayscale video
-frames—could yield richer and more robust descriptors than handcrafted
-features, allowing the model to learn discriminative motion cues without
-relying solely on static global shape descriptors.
+Convolutional neural networks learn high-level spatial representations directly
+from data and have demonstrated strong performance in action-recognition
+tasks~\cite{simonyan2014twostream}. Applying CNN-based feature extraction to
+MHI/MEI templates—or directly to raw video frames—may yield richer and more
+robust descriptors than handcrafted features, enabling the model to learn
+discriminative motion cues automatically.
 
 \subsection{Temporal Modeling Beyond Static Templates}
 
-Although MHI and MEI encode motion compactly, they collapse the temporal
-dimension into a single image. Future work could incorporate models that
-preserve sequential information, such as LSTMs, GRUs, or temporal CNNs. These
-approaches have shown strong performance in capturing temporal structure in
-video-based action recognition~\cite{ji2013cnn}. Models of this
-kind can operate on frame-level or clip-level features and capture motion
-patterns that unfold over time, improving recognition for actions where
-temporal ordering is essential.
+MHI and MEI compress motion into a single static image, discarding temporal
+ordering. Future extensions could incorporate models that preserve sequence
+structure, such as LSTMs, GRUs, or temporal CNNs~\cite{ji2013cnn}. These
+approaches capture how motion evolves over time and may improve performance on
+actions where temporal progression is critical.
 
-Overall, these three directions—richer handcrafted descriptors, deep learned
-features, and explicit temporal modeling—provide promising pathways for
-advancing the performance of template-based human activity recognition systems.
+Overall, richer handcrafted descriptors, learned deep features, and explicit
+temporal modeling represent promising pathways for advancing the performance of
+template-based human activity recognition systems.
